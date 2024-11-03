@@ -10,8 +10,8 @@
 
 ## About Laravel
 # Laravel Blog Application
-<img src="https://i.postimg.cc/ZRt6RjzS/Screenshot-2024-11-03-181031.png" alt="image" width="1012px">
-<img src="https://i.postimg.cc/m22CttJt/Screenshot-2024-11-03-181753.png" alt="image" width="1012px">
+<img src="https://i.postimg.cc/brR5Ls9Z/Screenshot-2024-11-03-185625.png" alt="image" width="1012px">
+<img src="https://i.postimg.cc/FHHMWgqN/Screenshot-2024-11-03-185455.png" alt="image" width="1012px">
 <img src="https://i.postimg.cc/zG4gtpBg/Screenshot-2024-11-03-181215.png" alt="image" width="1012px">
 
 
