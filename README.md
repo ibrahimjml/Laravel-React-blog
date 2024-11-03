@@ -10,9 +10,9 @@
 
 ## About Laravel
 # Laravel Blog Application
-![laravel-vite-page](https://i.postimg.cc/ZRt6RjzS/Screenshot-2024-11-03-181031.png)
-![laravel-vite-page](https://i.postimg.cc/m22CttJt/Screenshot-2024-11-03-181753.png)
-![laravel-vite-page](https://i.postimg.cc/zG4gtpBg/Screenshot-2024-11-03-181215.png)
+<img src="https://i.postimg.cc/ZRt6RjzS/Screenshot-2024-11-03-181031.png" alt="image" width="1012px">
+<img src="https://i.postimg.cc/m22CttJt/Screenshot-2024-11-03-181753.png" alt="image" width="1012px">
+<img src="https://i.postimg.cc/zG4gtpBg/Screenshot-2024-11-03-181215.png" alt="image" width="1012px">
 
 
 ## Laravel RESTful API for this project <img height="20" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1200px-Laravel.svg.png" />
