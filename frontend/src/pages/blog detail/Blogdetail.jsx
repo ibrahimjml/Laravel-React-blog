@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
-import Navbar from "../../components/navbar/Navbar";
+import { UserContext } from "../../Context/UserContext";
+
 
 
 export default function Blogdetail() {
   const {slug} = useParams();
   const [post, setPost] = useState(null);
-  const {navigate} = useNavigate();
+  const navigate = useNavigate();
+  const {user,token} =useContext(UserContext);
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -24,7 +26,7 @@ export default function Blogdetail() {
     fetchPost();
   }, [slug]);
 const handleDelete= async()=>{
-  const token = localStorage.getItem('access_token')
+
   try {
     const response = await fetch(`http://localhost:8000/api/delete/${slug}`,{
       method:"DELETE",
@@ -46,14 +48,17 @@ const handleDelete= async()=>{
 
   return (
     <>
-    <Navbar/>
+
     <div className="container mx-auto px-10 mt-4 md:w-3/4 ">
     <div className="flex justify-between ">
     <h1 className="text-4xl font-bold">{post.title}</h1>
-  <div className="flex gap-3">
+
+    {user.id === post.user_id && <div className="flex gap-3">
       <button className="borrder-none px-5 bg-slate-800 text-white font-semibold rounded-md"><Link to={`/edit/${post.slug}`}>Edit</Link></button>
       <button onClick={handleDelete} className="borrder-none px-5 bg-red-800 text-white font-semibold rounded-md">Delete</button>
   </div>
+  }
+  
     </div>
       
       <div className="flex gap-4 mt-4">

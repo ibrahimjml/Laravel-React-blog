@@ -1,6 +1,5 @@
 
 import { Link, useNavigate } from 'react-router-dom'
-import Navbar from '../../components/navbar/Navbar'
 import { useState } from 'react';
 
 export default function Register() {
@@ -50,7 +49,7 @@ setloading(false);
   
   return (
     <>
-    <Navbar/>
+    
     <main className="sm:container mx-auto  max-w-fit mt-5 mb-20 sm:max-w-lg sm:mt-10">
     <div className="flex">
         <div className="w-full">

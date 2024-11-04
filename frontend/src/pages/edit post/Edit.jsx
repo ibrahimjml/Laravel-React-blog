@@ -1,26 +1,26 @@
 import { Editor } from "@tinymce/tinymce-react";
-import Navbar from "../../components/navbar/Navbar";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { UserContext } from "../../Context/UserContext";
 
 export default function Edit() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const{token}=useContext(UserContext);
+  const navigate = useNavigate();
   const { slug } = useParams();
 
   const fetchPost = async () => {
     try {
       const response = await fetch(`http://localhost:8000/api/blog/${slug}`);
       const data = await response.json();
+    
       if (data.success) {
         setTitle(data.data.title);
         setDescription(data.data.description);
-        
-      } else {
-        console.error("Post not found");
-      }
+      } 
     } catch (error) {
       console.error(error.message);
     }
@@ -37,7 +37,7 @@ export default function Edit() {
       return;
     }
 
-    const token = localStorage.getItem('access_token');
+  
     const response = await fetch(`http://localhost:8000/api/update/${slug}`, {
       method: "PUT",
       headers: {
@@ -47,12 +47,13 @@ export default function Edit() {
       },
       body: JSON.stringify({ title, description })
     });
-    
+    const data = await response.json();
+
     if (!response.ok) {
-      const errorData = await response.json();
-      setError(errorData.message || "Server error");
+      
+      setError(data.message);
     } else {
-    
+      navigate('/');
       fetchPost();  
     }
 
@@ -65,7 +66,7 @@ export default function Edit() {
 
   return (
     <>
-      <Navbar />
+
       <h1 className="text-3xl text-black text-center py-3">Edit Post</h1>
       <div className="w-[70%] container mx-auto border border-gray-300 rounded-lg shadow-lg">
         <form className="p-6" onSubmit={handleSubmit}>

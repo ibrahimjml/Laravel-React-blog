@@ -1,13 +1,14 @@
 
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../../components/navbar/Navbar'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../../Context/UserContext';
 
 export default function Login() {
   const [email, setemail] = useState(null);
   const [password, setpassword] = useState(null);
   const [error, seterror] = useState(null);
   const [loading, setloading] = useState(false);
+  const {settoken} = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (eo)=>{
@@ -41,6 +42,11 @@ if(!email || !password){
 
 
       const data = await response.json();
+      if(data.message){
+        seterror('The credentials were incorrect');
+        setloading(false);
+        return;
+      }
       if (!response.ok) {
           seterror('server error');
           setloading(false);
@@ -50,9 +56,9 @@ if(!email || !password){
         setloading(false);
         navigate('/');
       }
-
-      const token = data.access_token;
-      localStorage.setItem("access_token",token);
+      
+      localStorage.setItem('access_token',data.access_token);
+      settoken(data.access_token);
   } catch (error) {
       console.error("Error during login:", error.message);
   }
@@ -61,7 +67,7 @@ setloading(false);
   }
   return (
     <>
-    <Navbar/>
+
     <main className="sm:container mx-auto  max-w-fit mt-5 mb-20 sm:max-w-lg sm:mt-10">
     <div className="flex">
         <div className="w-full">

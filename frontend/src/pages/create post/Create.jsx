@@ -1,13 +1,16 @@
 
-import {  useState } from 'react'
-import Navbar from '../../components/navbar/Navbar'
+import {  useContext, useState } from 'react'
 import { Editor } from '@tinymce/tinymce-react';
+import { UserContext } from '../../Context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Create() {
   const[title,settitle] = useState(null);
   const[description,setdescription] = useState(null);
   const[image,setimage] = useState(null);
   const[error,seterror] = useState(null);
+  const{token}=useContext(UserContext);
+  const navigate =useNavigate();
   const[loading,setloading] = useState(false);
   const handleSubmit = async (eo)=>{
     eo.preventDefault();
@@ -25,7 +28,6 @@ export default function Create() {
     formData.append("title", title);
     formData.append("description", description);
 
-      const token = localStorage.getItem('access_token');
       const response = await fetch("http://localhost:8000/api/create/post",{
         method:"POST",
         headers:{
@@ -40,6 +42,7 @@ export default function Create() {
         setloading(false);
         return;
       }else{
+        navigate('/');
         eo.target.reset();
       }
     
@@ -51,7 +54,7 @@ export default function Create() {
 
   return (
     <>
-    <Navbar/>
+
     <h1 className='text-3xl text-black text-center py-3'>Create Post</h1>
 <div className='w-[50%] container mx-auto border border-gray-300 rounded-lg shadow-lg'>
 
